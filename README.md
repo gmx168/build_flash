@@ -1,6 +1,10 @@
 # build_flash
 Pyhton wrapper for compiling, linking, merging, flashing and spiffs writting automaticaly for Esp32dev 
-
+Zero wprowadzania COMx
+Zero wprowadzania nazw plików i katalogów wejściowych i wynikowych --> umieść skrypt w katalogu gdzie plik .ino
+Zero kombinowania ze SPIFFS, masakra recznie wpychać pliki data i www --> zrobi to automatycznie
+Zero kasowania flash - zrobi to za ciebie
+Jak rakieta - odpalasz - idziesz na kawę, skompiluje, zlinkuje, wrzuci na flash, wrzuci spiffs, zresetuje UART.
 Do zdefiniowania własne ścieżki lokalizacji w pliku w zależności od użytego pakietu board - tutaj 3.3.3
 
 ARDUINO_CLI = r"C:\Program Files\Arduino CLI\arduino-cli.exe"
