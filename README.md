@@ -1,35 +1,21 @@
-# build_flash "FACADE"
-Pyhton wrapper for compiling, linking, merging, flashing and spiffs writting automaticaly for Esp32dev / S3 / C3 / S3zero
-
-[English version below]
-a. Zero wprowadzania COMx
-b. Zero wprowadzania nazw plików i katalogów wejściowych i wynikowych --> umieść skrypt w katalogu gdzie plik .ino
-c. Zero kombinowania ze SPIFFS, masakra recznie wpychać pliki data i www --> zrobi to automatycznie
-d. Zero kasowania flash - zrobi to za ciebie
-e. Jak rakieta - odpalasz - idziesz na kawę, skompiluje, zlinkuje, wrzuci na flash, wrzuci spiffs, zresetuje UART. Robi to ok 2x szybciej niż IDE. Pewnie wolniej niż VS Platformio
-f. Do zdefiniowania własne ścieżki lokalizacji w skrypcie w zależności od użytego pakietu board - tutaj 3.3.3
-
-takie jak "\Grzeg\ wstawcie swoje:
-ARDUINO_CLI = r"C:\Program Files\Arduino CLI\arduino-cli.exe"
+build_flash "FACADE"Automatyczny Python Wrapper do Kompilacji i Flashowania ESP32 / S3 / C3<p align="center"><img src="https://img.shields.io/badge/Platform-ESP32%20%7C%20S3%20%7C%20C3-blueviolet.svg" alt="Platform Badge"><img src="https://img.shields.io/badge/Language-Python-informational.svg" alt="Python Badge"><img src="https://img.shields.io/badge/Tool-Arduino%20CLI%20%2B%20esptool-red.svg" alt="Tool Badge"></p>FACADE to Twój nowy, ultraszybki asystent, który automatyzuje cały proces compiling, linking, merging, flashing oraz SPIFFS writing dla mikrokontrolerów ESP32, ESP32-S3 i ESP32-C3.Pożegnaj się z ręcznym wprowadzaniem danych – ciesz się workflowem na autopilocie!⚡ Główne Zalety – Koniec z ręcznym konfigurowaniem!FunkcjonalnośćFACADEStandardowe IDEWykrywanie portu COM✅ Automatyczne❌ Wymaga ręcznego wyboruNazwy plików/katalogów✅ Automatyczne (z folderu)❌ Wymaga podawaniaObsługa SPIFFS✅ Automatyczna (tworzenie i flashowanie)❌ Często ręczny i skomplikowanyKasowanie Flash✅ Automatyczne❌ Wymaga ręcznej akcjiSzybkość~2x szybszy niż IDE!Zwykle wolniejszy✨ Kluczowe UsprawnieniaZero Wprowadzania Danych: Skrypt sam znajduje plik .ino, jego folder domowy i wykrywa podłączony port COM.SPIFFS bez Bólu Głowy: Jeśli ustawisz partycję ze SPIFFS, skrypt automatycznie stworzy plik spiffs.bin i wgra go do pamięci."Jak Rakieta" 🚀: Uruchom go i idź na kawę! Skompiluje, zlinkuje, wrzuci na flash, wgra SPIFFS i zresetuje UART.⏱️ Uwaga: Choć jest ok. 2x szybszy niż standardowe IDE, może być wolniejszy niż VS PlatformIO.🛠️ Jak To Działa?Umieść skrypt w katalogu głównym projektu Arduino (tam, gdzie znajduje się plik .ino).Skrypt odczytuje nazwę pliku i katalogu na podstawie typowej struktury Arduino.Magia Dzieje Się w Komentarzach! 🧙‍♂️ W pliku .ino umieść specjalne dyrektywy w formie zwykłych komentarzy, aby nadpisać domyślne ustawienia płytki.📝 Dyrektywy Konfiguracyjne (w pliku .ino)Dyrektywy są umieszczane jako komentarze w formacie: //DYREKTYWA=WARTOŚĆ. Nieaktywne dyrektywy oznacz jako //-DYREKTYWA=WARTOŚĆ.DyrektywaOpisPrzykładowe Wartości//PART=VALUESchemat partycji.AUTO (Domyślnie), MS (min_spiffs), HA (huge_app), DEFAULT, lub nazwa surowa (default_8MB).//FLASH=VALUERozmiar pamięci Flash.2MB, 4MB (Domyślnie), 8MB, 16MB, 32MB.//PSRAM=VALUEKonfiguracja PSRAM dla FQBN (dla S3: OPI, QPI, DISABLED).ENABLED, DISABLED.//ERASE=TRUECałkowite kasowanie flash przed kompilacją/flashowaniem.TRUE.//CUST=TRUEUżycie mkspiffs i flashowanie SPIFFS z katalogu data/.TRUE.//COM=NUMBERRęczne określenie portu COM (np. //COM=5). Jeśli pominięte, następuje auto-detekcja.Liczba portu.//PLATFORM=VALUEArchitektura chipa. Można też użyć //ESP32S3 lub //ESP32C3.ESP32 (Domyślnie), ESP32S3, ESP32C3.Przykład użycia w pliku .ino:C++//PART=HA
+//FLASH=16MB
+//CUST=TRUE
+//PLATFORM=ESP32S3
+//... reszta kodu ...
+⚙️ Wymagania i InstalacjaWymagania Wstępne:Zainstalowany Python.Zainstalowany i skonfigurowany Arduino CLI.Zainstalowany pakiet platformy ESP32 w Arduino (wymagany do ścieżek esptool i mkspiffs).Wymagane biblioteki Python:Bashpip install colorama pyserial
+Ustawienie Ścieżek Lokalnych:W skrypcie musisz zdefiniować własne ścieżki do narzędzi (wersja pakietu np. 3.3.3 może się różnić):PythonARDUINO_CLI = r"C:\Program Files\Arduino CLI\arduino-cli.exe"
 ESPTOOL = r"C:\Users\Grzeg\AppData\Local\Arduino15\packages\esp32\tools\esptool_py\5.1.0\esptool.exe"
+
+# Ustawienia Domyślne
 BOARD = "esp32:esp32:esp32"
 DEFAULT_PARTITION = "minimal"
 DEFAULT_FLASH_SIZE = "4MB"
 BAUD = 921600
 BOOT_APP0 = r"C:\Users\Grzeg\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.3\tools\partitions\boot_app0.bin"
 LOG_FILE = "bf_log.txt"
-
-
-
-Jak działa:
-1. Uruchamianie: python facade.py
-    W katalogu w którym jest plik .ino pobiera jego folder domowy (nazwę) oraz nazwę i na podstawie typowej struktury plików produkuje zgodnie z nazwą .ino wszystkie pliki.
-W pliku .ino umieszczamy dyrektywy dla tego wrappera, jako zwykłe komentarze.
-
-3. Jesli ustawiona będzie partycja ze SPIFFS, to skrypt automatycznie stworzy plik spiffs.bin i "wrzuci go do pamięci ESP32"
-4. Sam wykrywa pod którym COM jest podłączony ESP, nie trzeba podawać
-5. W przypadku posiadania w tym samym katalogu dwóch lub więcej plików ino. jako parametr należy podać który plik ma kompilować.
-6. Nie trzeba za każdym razem zmieniać ustawien płytki pod ESP32 - są projekty z inną partycją - majace PSRAM czy podłączone kilka urządzeń pod COMy (np. środowisko OT) to w pliku .ino w pierwszych liniach można podać wg tabelki poniżej
+▶️ UżycieUpewnij się, że Twoje dyrektywy w pliku .ino są ustawione.Uruchom skrypt w katalogu projektu:Bashpython facade.py
+Jeśli w katalogu jest więcej niż jeden plik .ino, podaj jego nazwę jako parametr.👤 AutorGrzegorz Maletka "FRYGA" dla yoRadio Community[English version below]
 
 ESP32 Build and Flash Utility (Facade)
 --------------------------------------------------------------------------------
