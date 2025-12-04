@@ -169,7 +169,35 @@ Example .ino Directives:
 //PLATFORM=ESP32S3
 
    
+<h2>A FACADE eszköz leírása (HU) 🇭🇺</h2>
+<p>
+    A <strong>build_flash "FACADE"</strong> egy rendkívül gyors Python wrapper, amely automatizálja az ESP32 / S3 / C3 mikrovezérlők teljes fordítási, linkelési, egyesítési, flash-elési és SPIFFS írási folyamatát.<br>
+    Fő célja a COM portok, fájlnevek és útvonalak kézi megadásának kiküszöbölése, valamint a particionálás és SPIFFS automatikus kezelése. "Rakétasebességű" munkafolyamatot kínál, amely kb. 2x gyorsabb, mint a szokásos Arduino IDE.
+</p>
 
+<hr>
+
+<h2>Опис інструменту FACADE (UA) 🇺🇦</h2>
+<p>
+    <strong>build_flash "FACADE"</strong> – це надшвидкий Python-обгортка, яка автоматизує повний процес компіляції, лінкування, злиття, прошивки (флешування) та запису SPIFFS для мікроконтролерів <strong>ESP32 / S3 / C3</strong>.<br>
+    Його основна мета – усунути необхідність ручного введення COM-портів, імен файлів та шляхів, а також автоматизувати керування розділами та SPIFFS. Пропонує "ракетний" робочий процес, який приблизно у 2 рази швидший, ніж стандартне середовище Arduino IDE.
+</p>
+
+<hr>
+
+<h2>Описание инструмента FACADE (RU) 🇷🇺</h2>
+<p>
+    <strong>build_flash "FACADE"</strong> — это сверхбыстрая оболочка (wrapper) на Python, которая автоматизирует полный процесс компиляции, линковки, слияния, прошивки и записи SPIFFS для микроконтроллеров <strong>ESP32 / S3 / C3</strong>.<br>
+    Его основная цель — исключить ручной ввод COM-портов, имен файлов и путей, а также автоматически управлять разделением и SPIFFS. Он предлагает "ракетный" рабочий процесс, который примерно в 2 раза быстрее, чем стандартная Arduino IDE.
+</p>
+
+<hr>
+
+<h2>Popis nástroje FACADE (CZ) 🇨🇿</h2>
+<p>
+    <strong>build_flash "FACADE"</strong> je ultrarychlý Python wrapper, který automatizuje kompletní proces kompilace, linkování, slučování, flashování a zápisu SPIFFS pro mikrokontroléry <strong>ESP32 / S3 / C3</strong>.<br>
+    Jeho hlavním cílem je eliminovat ruční zadávání COM portů, názvů souborů a cest a automaticky spravovat rozdělení a SPIFFS. Nabízí pracovní postup "jako raketa", který je přibližně 2x rychlejší než standardní Arduino IDE.
+</p>
 
 
 
